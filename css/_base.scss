@@ -1,0 +1,81 @@
+$text-color: orange;
+
+@mixin box-shadow($color) {
+  box-shadow: 3px 3px 4px 1px $color;
+}
+
+@mixin text-effect($val) {
+  @if $val == danger {
+    color: red;
+  } @else if $val == alert {
+    color: yellow;
+  } @else {
+    color: black;
+  }
+}
+
+body {
+  @extend .flex;
+  flex-direction: column;
+  background-color: #7159c1;
+  color: $text-color;
+}
+
+// .container {
+//   @include box-shadow(rgba(0, 0, 0, 0.6));
+//   width: 200px;
+//   height: 200px;
+//   background-color: white;
+//   color: white;
+//   $text-color: blue;
+//   p {
+//     @include box-shadow(rgba(0, 0, 0, 0.6));
+//     height: 100px;
+//     width: 100px;
+//     background-color: red;
+//     color: $text-color;
+//     @include text-effect(alert);
+//   }
+// }
+
+//through conta o 5, se fosse to ignoraria o 5
+@for $i from 1 through 5 {
+  .text-#{$i} {
+    font-size: 15px * $i;
+  }
+}
+
+// $colors: (
+//   color1: blue,
+//   color2: red,
+//   color3: yellow,
+// );
+
+// @each $key, $color in $colors {
+//   .#{$color}-text {
+//     color: $color;
+//   }
+// }
+
+//modo mais rápido
+$colors: blue, red, yellow;
+
+@each $color in $colors {
+  .#{$color}-text {
+    // color: lighten($color, 10);
+    color: darken($color, 10);
+  }
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  color: white;
+  &:hover {
+    color: blue;
+  }
+}
